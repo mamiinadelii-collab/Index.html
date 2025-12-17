@@ -37,17 +37,10 @@
             font-family: 'Vazirmatn', sans-serif;
             background-color: #0f172a;
             color: #f8fafc;
-            /* Prevent pull-to-refresh on mobile */
             overscroll-behavior-y: none; 
         }
-        /* Hide scrollbar for clean horizontal scroll */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .gradient-text {
             background: linear-gradient(to left, #818cf8, #34d399);
             -webkit-background-clip: text;
@@ -59,30 +52,22 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        /* Pinned Card Style */
         .pinned-card {
-            border-color: #fbbf24 !important; /* Gold border */
+            border-color: #fbbf24 !important;
             box-shadow: 0 0 15px rgba(251, 191, 36, 0.15) !important;
             background: linear-gradient(to bottom right, #1e293b, rgba(251, 191, 36, 0.05));
         }
         .pinned-badge {
             position: absolute;
-            top: -10px;
-            left: 20px;
-            background-color: #fbbf24;
-            color: #0f172a;
-            font-size: 0.75rem;
-            font-weight: bold;
-            padding: 2px 10px;
-            border-radius: 9999px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            z-index: 10;
+            top: -10px; left: 20px;
+            background-color: #fbbf24; color: #0f172a;
+            font-size: 0.75rem; font-weight: bold;
+            padding: 2px 10px; border-radius: 9999px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3); z-index: 10;
         }
         .status-badge {
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: bold;
+            padding: 0.25rem 0.75rem; border-radius: 9999px;
+            font-size: 0.75rem; font-weight: bold;
         }
         .status-approved { background-color: rgba(16, 185, 129, 0.2); color: #34d399; }
         .status-pending { background-color: rgba(245, 158, 11, 0.2); color: #fbbf24; }
@@ -91,12 +76,10 @@
 </head>
 <body class="bg-dark min-h-screen flex flex-col">
 
-    <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed bottom-5 left-5 z-50 flex flex-col gap-2"></div>
 
     <!-- ================= USER VIEW ================= -->
     <div id="user-view" class="flex flex-col min-h-screen">
-        <!-- Header -->
         <header class="sticky top-0 z-40 w-full glass-effect border-b border-gray-700">
             <div class="container mx-auto px-4 py-3 flex justify-between items-center">
                 <div class="flex items-center gap-3">
@@ -109,8 +92,6 @@
                             <i class="fa-brands fa-telegram"></i> @Pooljoor
                         </a>
                     </div>
-                    
-                    <!-- Mobile Guide Button -->
                     <button onclick="openGuideModal()" class="md:hidden mr-2 w-8 h-8 rounded-full bg-gray-700/50 flex items-center justify-center text-gray-300 hover:text-white hover:bg-gray-600 transition-colors">
                         <i class="fa-solid fa-question text-sm"></i>
                     </button>
@@ -131,7 +112,6 @@
             </div>
         </header>
 
-        <!-- Telegram Welcome Section (Only visible in TG) -->
         <div id="tg-welcome" class="hidden container mx-auto px-4 mt-4">
             <div class="bg-gradient-to-r from-blue-900/40 to-primary/20 border border-blue-500/30 rounded-xl p-3 flex items-center gap-3">
                 <i class="fa-brands fa-telegram text-blue-400 text-2xl"></i>
@@ -142,7 +122,6 @@
             </div>
         </div>
 
-        <!-- Hero Section -->
         <section class="relative py-10 px-4 overflow-hidden">
             <div class="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
             <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl -z-10 -translate-x-1/2 translate-y-1/2"></div>
@@ -152,8 +131,6 @@
                     کد معرف خود را به <br/>
                     <span class="gradient-text">هزاران نفر</span> نمایش دهید
                 </h2>
-                
-                <!-- Search Bar -->
                 <div class="relative max-w-xl mx-auto group">
                     <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
                     <div class="relative flex items-center bg-card border border-gray-700 rounded-xl p-2 shadow-xl">
@@ -164,7 +141,6 @@
             </div>
         </section>
 
-        <!-- Categories -->
         <section id="categories" class="container mx-auto px-4 mb-6">
             <div class="flex gap-3 overflow-x-auto no-scrollbar py-2" id="categoryFilters">
                 <button class="filter-btn active whitespace-nowrap px-5 py-2 rounded-full bg-white text-dark font-bold text-sm transition-all" data-filter="all">همه</button>
@@ -175,20 +151,14 @@
             </div>
         </section>
 
-        <!-- Cards Grid -->
         <main class="container mx-auto px-4 flex-grow pb-20">
-            <div id="cardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Cards will be injected via JS -->
-            </div>
-            
-            <!-- Empty State -->
+            <div id="cardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             <div id="emptyState" class="hidden text-center py-20">
                 <i class="fa-solid fa-ghost text-6xl text-gray-700 mb-4"></i>
                 <p class="text-gray-400 text-lg">موردی یافت نشد!</p>
             </div>
         </main>
 
-        <!-- Footer -->
         <footer class="border-t border-gray-800 bg-dark py-8 mt-auto">
             <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
                 <p>&copy; 1404 رفرال کده. تمامی حقوق محفوظ است.</p>
@@ -197,7 +167,7 @@
                     <a href="#" class="hover:text-primary"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#" class="hover:text-primary"><i class="fa-brands fa-twitter"></i></a>
                 </div>
-                <button onclick="toggleAdminView()" class="mt-8 text-xs text-gray-700 hover:text-gray-500 transition-colors">
+                <button onclick="requestAdminAccess()" class="mt-8 text-xs text-gray-700 hover:text-gray-500 transition-colors">
                     <i class="fa-solid fa-lock"></i> ورود مدیران
                 </button>
             </div>
@@ -206,84 +176,48 @@
 
     <!-- ================= ADMIN VIEW ================= -->
     <div id="admin-view" class="hidden min-h-screen bg-gray-900 flex">
-        <!-- Sidebar -->
         <aside class="w-64 bg-card border-l border-gray-700 hidden md:flex flex-col p-4">
             <div class="flex items-center gap-2 mb-10 text-white font-bold text-xl">
                 <i class="fa-solid fa-user-shield text-primary"></i>
                 <span>پنل مدیریت</span>
             </div>
-            
             <nav class="space-y-2 flex-grow">
-                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary rounded-xl font-medium">
-                    <i class="fa-solid fa-gauge"></i> داشبورد
-                </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition-colors">
-                    <i class="fa-solid fa-users"></i> کاربران
-                </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition-colors">
-                    <i class="fa-solid fa-gear"></i> تنظیمات
-                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary rounded-xl font-medium"><i class="fa-solid fa-gauge"></i> داشبورد</a>
             </nav>
-
             <button onclick="toggleAdminView()" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors mt-auto">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i> خروج
             </button>
         </aside>
 
-        <!-- Main Content -->
         <div class="flex-grow p-6 overflow-y-auto h-screen">
-            <!-- Admin Header Mobile -->
             <div class="md:hidden flex justify-between items-center mb-6">
                 <h2 class="text-xl font-bold text-white">پنل مدیریت</h2>
                 <button onclick="toggleAdminView()" class="text-gray-400"><i class="fa-solid fa-times text-xl"></i></button>
             </div>
 
-            <!-- Stats Grid -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                 <div class="bg-card border border-gray-700 p-5 rounded-2xl shadow-lg">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="text-gray-400 text-xs mb-1">کل آگهی‌ها</p>
-                            <h3 class="text-2xl font-bold text-white" id="stat-total">0</h3>
-                        </div>
-                        <div class="bg-primary/20 p-2 rounded-lg text-primary"><i class="fa-solid fa-layer-group"></i></div>
-                    </div>
+                    <p class="text-gray-400 text-xs mb-1">کل آگهی‌ها</p>
+                    <h3 class="text-2xl font-bold text-white" id="stat-total">0</h3>
                 </div>
                 <div class="bg-card border border-gray-700 p-5 rounded-2xl shadow-lg">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="text-gray-400 text-xs mb-1">پین شده</p>
-                            <h3 class="text-2xl font-bold text-gold" id="stat-pinned">0</h3>
-                        </div>
-                        <div class="bg-yellow-500/20 p-2 rounded-lg text-gold"><i class="fa-solid fa-thumbtack"></i></div>
-                    </div>
+                    <p class="text-gray-400 text-xs mb-1">پین شده</p>
+                    <h3 class="text-2xl font-bold text-gold" id="stat-pinned">0</h3>
                 </div>
                 <div class="bg-card border border-gray-700 p-5 rounded-2xl shadow-lg">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="text-gray-400 text-xs mb-1">در انتظار تایید</p>
-                            <h3 class="text-2xl font-bold text-warning" id="stat-pending">0</h3>
-                        </div>
-                        <div class="bg-warning/20 p-2 rounded-lg text-warning"><i class="fa-solid fa-clock"></i></div>
-                    </div>
+                    <p class="text-gray-400 text-xs mb-1">در انتظار تایید</p>
+                    <h3 class="text-2xl font-bold text-warning" id="stat-pending">0</h3>
                 </div>
                 <div class="bg-card border border-gray-700 p-5 rounded-2xl shadow-lg">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="text-gray-400 text-xs mb-1">بازدید امروز</p>
-                            <h3 class="text-2xl font-bold text-blue-400">1,204</h3>
-                        </div>
-                        <div class="bg-blue-500/20 p-2 rounded-lg text-blue-400"><i class="fa-solid fa-chart-line"></i></div>
-                    </div>
+                    <p class="text-gray-400 text-xs mb-1">بازدید امروز</p>
+                    <h3 class="text-2xl font-bold text-blue-400">1,204</h3>
                 </div>
             </div>
 
-            <!-- Table -->
             <div class="bg-card border border-gray-700 rounded-2xl overflow-hidden shadow-xl">
                 <div class="p-6 border-b border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4">
                     <h3 class="font-bold text-white">مدیریت آگهی‌ها</h3>
                     <div class="flex gap-2 w-full md:w-auto">
-                        <!-- Admin Category Filter -->
                         <select id="adminCategoryFilter" onchange="handleAdminFilterChange(this.value)" class="bg-dark border border-gray-600 rounded-lg px-3 py-1 text-sm text-white focus:outline-none focus:border-primary cursor-pointer">
                             <option value="all">همه دسته‌ها</option>
                             <option value="crypto">صرافی و کریپتو</option>
@@ -291,8 +225,7 @@
                             <option value="game">بازی تلگرامی</option>
                             <option value="service">خدماتی</option>
                         </select>
-                        
-                        <input type="text" id="adminSearchInput" placeholder="جستجو در لیست..." class="bg-dark border border-gray-600 rounded-lg px-3 py-1 text-sm text-white focus:outline-none focus:border-primary flex-grow md:flex-grow-0">
+                        <input type="text" id="adminSearchInput" placeholder="جستجو..." class="bg-dark border border-gray-600 rounded-lg px-3 py-1 text-sm text-white focus:outline-none focus:border-primary flex-grow md:flex-grow-0">
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -307,9 +240,7 @@
                                 <th class="px-6 py-4 text-center">عملیات</th>
                             </tr>
                         </thead>
-                        <tbody id="adminTableBody" class="divide-y divide-gray-700 text-sm">
-                            <!-- Admin Rows Injected Here -->
-                        </tbody>
+                        <tbody id="adminTableBody" class="divide-y divide-gray-700 text-sm"></tbody>
                     </table>
                 </div>
             </div>
@@ -318,97 +249,57 @@
 
     <!-- ================= MODALS ================= -->
     
+    <!-- Login Modal (NEW) -->
+    <div id="loginModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity" onclick="closeLoginModal()"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-sm p-4">
+            <div class="bg-card border border-gray-700 rounded-2xl shadow-2xl p-6 relative animate-fade-in-up text-center">
+                <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-700">
+                    <i class="fa-solid fa-lock text-2xl text-gray-400"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">ورود مدیر</h3>
+                <p class="text-gray-400 text-sm mb-6">برای دسترسی به پنل، نام کاربری و رمز عبور را وارد کنید.</p>
+                
+                <form onsubmit="handleLoginSubmit(event)">
+                    <!-- USERNAME INPUT ADDED HERE -->
+                    <input type="text" id="adminUsername" placeholder="نام کاربری..." class="w-full bg-dark border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-primary focus:outline-none mb-3 text-center tracking-widest">
+                    <input type="password" id="adminPassword" placeholder="رمز عبور..." class="w-full bg-dark border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-primary focus:outline-none mb-4 text-center tracking-widest">
+                    <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-primary/20">
+                        ورود
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Guide Modal -->
     <div id="guideModal" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onclick="closeGuideModal()"></div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl p-4">
             <div class="bg-card border border-gray-700 rounded-2xl shadow-2xl p-0 relative animate-fade-in-up overflow-hidden max-h-[90vh] flex flex-col">
-                <!-- Header -->
                 <div class="bg-dark/50 p-4 border-b border-gray-700 flex justify-between items-center flex-shrink-0">
                     <h3 class="text-xl font-bold text-white"><i class="fa-solid fa-book-open text-primary ml-2"></i>مرکز آموزش</h3>
-                    <button onclick="closeGuideModal()" class="text-gray-400 hover:text-white transition-colors bg-black/20 w-8 h-8 rounded-full flex items-center justify-center">
-                        <i class="fa-solid fa-times"></i>
-                    </button>
+                    <button onclick="closeGuideModal()" class="text-gray-400 hover:text-white transition-colors bg-black/20 w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-times"></i></button>
                 </div>
-
-                <!-- Tabs -->
                 <div class="flex border-b border-gray-700 bg-dark/30 flex-shrink-0">
-                    <button onclick="switchGuideTab('general')" id="tab-general" class="flex-1 py-3 text-sm font-bold text-white border-b-2 border-primary bg-primary/5 transition-all">
-                        <i class="fa-solid fa-gift ml-2"></i>دریافت پاداش
-                    </button>
-                    <button onclick="switchGuideTab('kyc')" id="tab-kyc" class="flex-1 py-3 text-sm font-bold text-gray-400 hover:text-white hover:bg-white/5 border-b-2 border-transparent transition-all">
-                        <i class="fa-solid fa-id-card ml-2"></i>احراز هویت
-                    </button>
+                    <button onclick="switchGuideTab('general')" id="tab-general" class="flex-1 py-3 text-sm font-bold text-white border-b-2 border-primary bg-primary/5 transition-all"><i class="fa-solid fa-gift ml-2"></i>دریافت پاداش</button>
+                    <button onclick="switchGuideTab('kyc')" id="tab-kyc" class="flex-1 py-3 text-sm font-bold text-gray-400 hover:text-white hover:bg-white/5 border-b-2 border-transparent transition-all"><i class="fa-solid fa-id-card ml-2"></i>احراز هویت</button>
                 </div>
-                
-                <!-- Content Container -->
                 <div class="p-6 overflow-y-auto">
-                    <!-- General Guide -->
                     <div id="guide-general" class="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in-up">
-                        <div class="flex gap-4">
-                            <div class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex flex-shrink-0 items-center justify-center font-bold text-lg border border-blue-500/30">1</div>
-                            <div>
-                                <h4 class="font-bold text-white mb-1">انتخاب پلتفرم</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed">از لیست دسته‌بندی‌ها (بازی، صرافی، طلا)، سرویس مورد نظر خود را پیدا کنید.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 flex flex-shrink-0 items-center justify-center font-bold text-lg border border-purple-500/30">2</div>
-                            <div>
-                                <h4 class="font-bold text-white mb-1">کپی کد معرف</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed">روی دکمه <span class="bg-gray-700 px-1 rounded text-xs mx-1"><i class="fa-regular fa-copy"></i></span> کلیک کنید تا کد معرف در حافظه کپی شود.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-400 flex flex-shrink-0 items-center justify-center font-bold text-lg border border-yellow-500/30">3</div>
-                            <div>
-                                <h4 class="font-bold text-white mb-1">ثبت نام با لینک</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed">اگر دکمه «ورود» وجود دارد، روی آن بزنید. این لینک‌ها معمولاً کد را خودکار اعمال می‌کنند.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="w-10 h-10 rounded-full bg-green-500/20 text-green-400 flex flex-shrink-0 items-center justify-center font-bold text-lg border border-green-500/30">4</div>
-                            <div>
-                                <h4 class="font-bold text-white mb-1">دریافت جایزه</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed">هنگام ثبت‌نام در بخش "Refferal Code" کدی که کپی کردید را وارد کنید.</p>
-                            </div>
-                        </div>
-                        <div class="col-span-1 md:col-span-2 bg-gray-800/50 p-3 rounded-xl border border-gray-700 flex items-center gap-3 mt-2">
-                            <i class="fa-regular fa-lightbulb text-yellow-400 text-lg"></i>
-                            <p class="text-xs text-gray-400">برای ربات‌های تلگرامی (مثل همستر)، فقط کافیست روی دکمه «ورود» کلیک کنید؛ نیازی به وارد کردن کد نیست.</p>
-                        </div>
+                        <!-- Steps Content -->
+                        <div class="flex gap-4"><div class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex flex-shrink-0 items-center justify-center font-bold text-lg border border-blue-500/30">1</div><div><h4 class="font-bold text-white mb-1">انتخاب پلتفرم</h4><p class="text-gray-400 text-sm leading-relaxed">سرویس مورد نظر را پیدا کنید.</p></div></div>
+                        <div class="flex gap-4"><div class="w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 flex flex-shrink-0 items-center justify-center font-bold text-lg border border-purple-500/30">2</div><div><h4 class="font-bold text-white mb-1">کپی کد معرف</h4><p class="text-gray-400 text-sm leading-relaxed">کد را کپی کنید.</p></div></div>
+                        <div class="flex gap-4"><div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-400 flex flex-shrink-0 items-center justify-center font-bold text-lg border border-yellow-500/30">3</div><div><h4 class="font-bold text-white mb-1">ثبت نام</h4><p class="text-gray-400 text-sm leading-relaxed">با لینک وارد شوید.</p></div></div>
+                        <div class="flex gap-4"><div class="w-10 h-10 rounded-full bg-green-500/20 text-green-400 flex flex-shrink-0 items-center justify-center font-bold text-lg border border-green-500/30">4</div><div><h4 class="font-bold text-white mb-1">دریافت جایزه</h4><p class="text-gray-400 text-sm leading-relaxed">کد را وارد کنید.</p></div></div>
                     </div>
-
-                    <!-- KYC Guide -->
                     <div id="guide-kyc" class="hidden grid grid-cols-1 gap-4 animate-fade-in-up">
-                        <div class="bg-orange-500/10 border border-orange-500/30 p-4 rounded-xl flex gap-3 items-start mb-2">
-                            <i class="fa-solid fa-shield-halved text-orange-400 mt-1 text-xl"></i>
-                            <div>
-                                <h4 class="text-orange-400 font-bold text-sm">چرا احراز هویت؟</h4>
-                                <p class="text-gray-400 text-xs mt-1">صرافی‌های ایرانی و پلتفرم‌های طلا طبق قانون برای جلوگیری از پولشویی نیاز به تایید هویت دارند.</p>
-                            </div>
-                        </div>
+                        <div class="bg-orange-500/10 border border-orange-500/30 p-4 rounded-xl flex gap-3 items-start mb-2"><i class="fa-solid fa-shield-halved text-orange-400 mt-1 text-xl"></i><div><h4 class="text-orange-400 font-bold text-sm">احراز هویت</h4><p class="text-gray-400 text-xs mt-1">الزامی برای صرافی‌ها و طلا.</p></div></div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-dark/40 p-3 rounded-lg border border-gray-700 flex gap-3 items-center">
-                                <i class="fa-solid fa-address-card text-2xl text-gray-500"></i>
-                                <div><h5 class="text-white font-bold text-sm">۱. مدارک هویتی</h5><p class="text-gray-500 text-xs">کارت ملی هوشمند یا شناسنامه جدید.</p></div>
-                            </div>
-                            <div class="bg-dark/40 p-3 rounded-lg border border-gray-700 flex gap-3 items-center">
-                                <i class="fa-solid fa-mobile-screen-button text-2xl text-gray-500"></i>
-                                <div><h5 class="text-white font-bold text-sm">۲. مالکیت سیم‌کارت</h5><p class="text-gray-500 text-xs">شماره موبایل باید حتماً به نام خودتان باشد.</p></div>
-                            </div>
-                            <div class="bg-dark/40 p-3 rounded-lg border border-gray-700 flex gap-3 items-center">
-                                <i class="fa-solid fa-credit-card text-2xl text-gray-500"></i>
-                                <div><h5 class="text-white font-bold text-sm">۳. کارت بانکی</h5><p class="text-gray-500 text-xs">شماره کارت و شبا باید به نام صاحب حساب باشد.</p></div>
-                            </div>
-                            <div class="bg-dark/40 p-3 rounded-lg border border-gray-700 flex gap-3 items-center">
-                                <i class="fa-solid fa-camera text-2xl text-gray-500"></i>
-                                <div><h5 class="text-white font-bold text-sm">۴. عکس و تعهدنامه</h5><p class="text-gray-500 text-xs">نوشتن متن تعهد روی کاغذ و عکس گرفتن با مدارک.</p></div>
-                            </div>
-                        </div>
-                        <div class="bg-red-500/10 border border-red-500/30 p-3 rounded-xl flex items-center gap-3 mt-2">
-                            <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
-                            <p class="text-xs text-red-300"><strong>هشدار امنیتی:</strong> هرگز عکس مدارک خود را در تلگرام یا واتساپ برای افراد ناشناس ارسال نکنید. مدارک فقط باید در سایت یا اپلیکیشن رسمی آپلود شوند.</p>
+                            <div class="bg-dark/40 p-3 rounded-lg border border-gray-700 flex gap-3 items-center"><i class="fa-solid fa-address-card text-2xl text-gray-500"></i><div><h5 class="text-white font-bold text-sm">۱. مدارک هویتی</h5></div></div>
+                            <div class="bg-dark/40 p-3 rounded-lg border border-gray-700 flex gap-3 items-center"><i class="fa-solid fa-mobile-screen-button text-2xl text-gray-500"></i><div><h5 class="text-white font-bold text-sm">۲. سیم‌کارت</h5></div></div>
+                            <div class="bg-dark/40 p-3 rounded-lg border border-gray-700 flex gap-3 items-center"><i class="fa-solid fa-credit-card text-2xl text-gray-500"></i><div><h5 class="text-white font-bold text-sm">۳. کارت بانکی</h5></div></div>
+                            <div class="bg-dark/40 p-3 rounded-lg border border-gray-700 flex gap-3 items-center"><i class="fa-solid fa-camera text-2xl text-gray-500"></i><div><h5 class="text-white font-bold text-sm">۴. عکس تعهد</h5></div></div>
                         </div>
                     </div>
                 </div>
@@ -416,114 +307,61 @@
         </div>
     </div>
 
-    <!-- Add Code Modal -->
+    <!-- Add/Edit Modals -->
     <div id="addModal" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-4">
             <div class="bg-card border border-gray-700 rounded-2xl shadow-2xl p-6 relative animate-fade-in-up">
-                <button onclick="closeModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white">
-                    <i class="fa-solid fa-times text-xl"></i>
-                </button>
+                <button onclick="closeModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fa-solid fa-times text-xl"></i></button>
                 <h3 class="text-xl font-bold text-white mb-1">ثبت کد جدید</h3>
                 <p class="text-gray-400 text-sm mb-6">آگهی شما پس از تایید مدیر نمایش داده می‌شود.</p>
                 <form id="addForm" class="space-y-4" onsubmit="handleAddSubmit(event)">
-                    <div>
-                        <label class="block text-gray-400 text-xs mb-1">دسته‌بندی</label>
-                        <select required id="newCategory" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-primary focus:outline-none">
-                            <option value="crypto">صرافی و کریپتو</option>
-                            <option value="gold">طلا و جواهر</option>
-                            <option value="game">بازی تلگرامی</option>
-                            <option value="service">خدماتی</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-gray-400 text-xs mb-1">نام اپلیکیشن / سایت</label>
-                        <input type="text" id="newTitle" required placeholder="مثلاً: همستر کامبت" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-primary focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-gray-400 text-xs mb-1">کد معرف</label>
-                        <input type="text" id="newCode" placeholder="CODE123" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-primary focus:outline-none font-mono text-left" dir="ltr">
-                    </div>
-                    <div>
-                        <label class="block text-gray-400 text-xs mb-1">لینک دعوت</label>
-                        <input type="url" id="newLink" placeholder="https://..." class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-primary focus:outline-none font-mono text-left" dir="ltr">
-                    </div>
-                    <div>
-                        <label class="block text-gray-400 text-xs mb-1">پاداش / توضیحات</label>
-                        <textarea id="newDesc" required placeholder="توضیحات کوتاه..." rows="2" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-primary focus:outline-none"></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-primary/20 mt-2">
-                        ثبت آگهی رایگان
-                    </button>
+                    <div><label class="block text-gray-400 text-xs mb-1">دسته‌بندی</label><select required id="newCategory" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white"><option value="crypto">صرافی و کریپتو</option><option value="gold">طلا و جواهر</option><option value="game">بازی تلگرامی</option><option value="service">خدماتی</option></select></div>
+                    <div><label class="block text-gray-400 text-xs mb-1">نام</label><input type="text" id="newTitle" required class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white"></div>
+                    <div><label class="block text-gray-400 text-xs mb-1">کد معرف</label><input type="text" id="newCode" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white font-mono text-left" dir="ltr"></div>
+                    <div><label class="block text-gray-400 text-xs mb-1">لینک</label><input type="url" id="newLink" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white font-mono text-left" dir="ltr"></div>
+                    <div><label class="block text-gray-400 text-xs mb-1">توضیحات</label><textarea id="newDesc" required rows="2" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white"></textarea></div>
+                    <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-primary/20 mt-2">ثبت آگهی رایگان</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- NEW: Edit Code Modal -->
     <div id="editModal" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity" onclick="closeEditModal()"></div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-4">
             <div class="bg-card border border-gray-700 rounded-2xl shadow-2xl p-6 relative animate-fade-in-up">
-                <button onclick="closeEditModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white">
-                    <i class="fa-solid fa-times text-xl"></i>
-                </button>
-                <h3 class="text-xl font-bold text-white mb-1"><i class="fa-solid fa-pen-to-square ml-2 text-blue-400"></i>ویرایش آگهی</h3>
-                <p class="text-gray-400 text-sm mb-6">تغییرات بلافاصله اعمال می‌شوند.</p>
-                <form id="editForm" class="space-y-4" onsubmit="handleEditSubmit(event)">
+                <button onclick="closeEditModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fa-solid fa-times text-xl"></i></button>
+                <h3 class="text-xl font-bold text-white mb-1">ویرایش آگهی</h3>
+                <form id="editForm" class="space-y-4 mt-6" onsubmit="handleEditSubmit(event)">
                     <input type="hidden" id="editId">
-                    <div>
-                        <label class="block text-gray-400 text-xs mb-1">دسته‌بندی</label>
-                        <select required id="editCategory" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-primary focus:outline-none">
-                            <option value="crypto">صرافی و کریپتو</option>
-                            <option value="gold">طلا و جواهر</option>
-                            <option value="game">بازی تلگرامی</option>
-                            <option value="service">خدماتی</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-gray-400 text-xs mb-1">نام اپلیکیشن / سایت</label>
-                        <input type="text" id="editTitle" required class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-primary focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-gray-400 text-xs mb-1">کد معرف</label>
-                        <input type="text" id="editCode" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-primary focus:outline-none font-mono text-left" dir="ltr">
-                    </div>
-                    <div>
-                        <label class="block text-gray-400 text-xs mb-1">لینک دعوت</label>
-                        <input type="url" id="editLink" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-primary focus:outline-none font-mono text-left" dir="ltr">
-                    </div>
-                    <div>
-                        <label class="block text-gray-400 text-xs mb-1">پاداش / توضیحات</label>
-                        <textarea id="editDesc" required rows="2" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-primary focus:outline-none"></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-500/20 mt-2">
-                        ذخیره تغییرات
-                    </button>
+                    <div><label class="block text-gray-400 text-xs mb-1">دسته‌بندی</label><select required id="editCategory" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white"><option value="crypto">صرافی</option><option value="gold">طلا</option><option value="game">بازی</option><option value="service">خدماتی</option></select></div>
+                    <div><label class="block text-gray-400 text-xs mb-1">نام</label><input type="text" id="editTitle" required class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white"></div>
+                    <div><label class="block text-gray-400 text-xs mb-1">کد معرف</label><input type="text" id="editCode" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white font-mono text-left" dir="ltr"></div>
+                    <div><label class="block text-gray-400 text-xs mb-1">لینک</label><input type="url" id="editLink" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white font-mono text-left" dir="ltr"></div>
+                    <div><label class="block text-gray-400 text-xs mb-1">توضیحات</label><textarea id="editDesc" required rows="2" class="w-full bg-dark border border-gray-600 rounded-lg px-3 py-2 text-white"></textarea></div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-500/20 mt-2">ذخیره تغییرات</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript Logic -->
     <script>
-        // Telegram WebApp Initialization
+        // --- CONFIGURATION (CREDENTIALS) ---
+        // این دو خط را می‌توانید بعداً برای تغییر رمز یا نام کاربری ویرایش کنید
+        const ADMIN_USERNAME = "aminadeli"; 
+        const ADMIN_PASSWORD = "@Min2006"; 
+        // -----------------------------------
+
         document.addEventListener("DOMContentLoaded", function() {
             if (window.Telegram && window.Telegram.WebApp) {
                 const tg = window.Telegram.WebApp;
-                
-                // Notify Telegram that the app is ready
                 tg.ready();
-                
-                // Expand to full height
                 tg.expand();
-                
-                // Check for user data
                 if(tg.initDataUnsafe && tg.initDataUnsafe.user) {
                     const user = tg.initDataUnsafe.user;
                     const welcomeDiv = document.getElementById('tg-welcome');
                     const usernameSpan = document.getElementById('tg-username');
-                    
                     if(welcomeDiv && usernameSpan) {
                         welcomeDiv.classList.remove('hidden');
                         usernameSpan.innerText = (user.first_name || '') + ' ' + (user.last_name || '');
@@ -534,9 +372,7 @@
 
         // Data Store
         const initialData = [
-            // Pinned Item Example
             { id: 1, title: "همستر کامبت", category: "game", description: "با لینک من وارد شو و ۵۰۰۰ سکه رایگان بگیر + پروفیت بالاتر!", code: null, link: "https://t.me/hamster", icon: "fa-gamepad", color: "text-purple-400", views: 1205, status: 'approved', pinned: true },
-            
             { id: 2, title: "نوبیتکس", category: "crypto", description: "۳۰٪ تخفیف کارمزد.", code: "REF123", link: "https://nobitex.ir", icon: "fa-bitcoin", color: "text-yellow-400", views: 850, status: 'approved', pinned: false },
             { id: 7, title: "میلی (Milli)", category: "gold", description: "۵ میلی طلای رایگان.", code: "MILLI-G", link: "https://milli.gold", icon: "fa-medal", color: "text-yellow-500", views: 540, status: 'approved', pinned: false },
             { id: 3, title: "اسنپ", category: "service", description: "تخفیف ۴۰ تومنی.", code: "SN-99", link: null, icon: "fa-taxi", color: "text-green-400", views: 2100, status: 'approved', pinned: false },
@@ -546,20 +382,49 @@
 
         let referrals = [...initialData];
 
-        // --- View Management ---
+        // --- Auth & View Management ---
         const userView = document.getElementById('user-view');
         const adminView = document.getElementById('admin-view');
+        const loginModal = document.getElementById('loginModal');
+        let isAdminLoggedIn = false;
+
+        function requestAdminAccess() {
+            if (isAdminLoggedIn) {
+                toggleAdminView(); // Already logged in, just open
+            } else {
+                loginModal.classList.remove('hidden'); // Show login modal
+            }
+        }
+
+        function closeLoginModal() {
+            loginModal.classList.add('hidden');
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('adminUsername').value = '';
+        }
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const user = document.getElementById('adminUsername').value;
+            const pass = document.getElementById('adminPassword').value;
+            
+            if (user === ADMIN_USERNAME && pass === ADMIN_PASSWORD) {
+                isAdminLoggedIn = true;
+                closeLoginModal();
+                showToast('مدیر گرامی، خوش آمدید!', 'success');
+                toggleAdminView();
+            } else {
+                showToast('نام کاربری یا رمز عبور اشتباه است!', 'error');
+                document.getElementById('adminPassword').value = '';
+            }
+        }
 
         function toggleAdminView() {
             if (adminView.classList.contains('hidden')) {
-                // Show Admin
                 userView.classList.add('hidden');
                 adminView.classList.remove('hidden');
                 renderAdminTable();
                 updateStats();
-                showToast('به پنل مدیریت خوش آمدید', 'success');
             } else {
-                // Show User
                 adminView.classList.add('hidden');
                 userView.classList.remove('hidden');
                 applyFilters(); 
@@ -576,10 +441,7 @@
 
         function renderCards(data) {
             grid.innerHTML = '';
-            // Only show approved items in user view
             let visibleData = data.filter(item => item.status === 'approved');
-            
-            // SORTING LOGIC: Pinned items FIRST
             visibleData.sort((a, b) => {
                 if (a.pinned && !b.pinned) return -1;
                 if (!a.pinned && b.pinned) return 1;
@@ -597,18 +459,10 @@
                 const pinnedClass = item.pinned ? 'pinned-card relative' : 'bg-card border-gray-700 hover:border-gray-500';
                 card.className = `${pinnedClass} border rounded-2xl p-5 transition-all hover:-translate-y-1 shadow-xl flex flex-col h-full`;
                 
-                let pinnedBadge = '';
-                if(item.pinned) {
-                    pinnedBadge = `<div class="pinned-badge"><i class="fa-solid fa-thumbtack"></i> پیشنهاد ویژه</div>`;
-                }
-
+                let pinnedBadge = item.pinned ? `<div class="pinned-badge"><i class="fa-solid fa-thumbtack"></i> پیشنهاد ویژه</div>` : '';
                 let actionButtons = '';
-                if (item.code) {
-                    actionButtons += `<button onclick="copyToClipboard('${item.code}')" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2.5 rounded-xl text-sm font-medium transition-colors flex items-center justify-center gap-2 group"><span class="font-mono bg-black/20 px-2 rounded text-xs text-gray-300 group-hover:text-white">${item.code}</span><i class="fa-regular fa-copy"></i></button>`;
-                }
-                if (item.link) {
-                    actionButtons += `<a href="${item.link}" target="_blank" class="flex-1 bg-primary hover:bg-primary/90 text-white py-2.5 rounded-xl text-sm font-medium transition-colors flex items-center justify-center gap-2 text-center">ورود <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>`;
-                }
+                if (item.code) actionButtons += `<button onclick="copyToClipboard('${item.code}')" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2.5 rounded-xl text-sm font-medium transition-colors flex items-center justify-center gap-2 group"><span class="font-mono bg-black/20 px-2 rounded text-xs text-gray-300 group-hover:text-white">${item.code}</span><i class="fa-regular fa-copy"></i></button>`;
+                if (item.link) actionButtons += `<a href="${item.link}" target="_blank" class="flex-1 bg-primary hover:bg-primary/90 text-white py-2.5 rounded-xl text-sm font-medium transition-colors flex items-center justify-center gap-2 text-center">ورود <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>`;
 
                 card.innerHTML = `
                     ${pinnedBadge}
@@ -629,104 +483,33 @@
             });
         }
 
-        function getCategoryName(cat) {
-            const map = { 'crypto': 'کریپتو', 'game': 'بازی', 'service': 'خدماتی', 'gold': 'طلا و جواهر' };
-            return map[cat] || 'عمومی';
-        }
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => { b.classList.remove('bg-white', 'text-dark', 'font-bold'); b.classList.add('bg-card', 'text-gray-300'); });
-                btn.classList.remove('bg-card', 'text-gray-300'); btn.classList.add('bg-white', 'text-dark', 'font-bold');
-                currentFilter = btn.dataset.filter;
-                applyFilters();
-            });
-        });
-
+        function getCategoryName(cat) { const map = { 'crypto': 'کریپتو', 'game': 'بازی', 'service': 'خدماتی', 'gold': 'طلا و جواهر' }; return map[cat] || 'عمومی'; }
+        filterBtns.forEach(btn => { btn.addEventListener('click', () => { filterBtns.forEach(b => { b.classList.remove('bg-white', 'text-dark', 'font-bold'); b.classList.add('bg-card', 'text-gray-300'); }); btn.classList.remove('bg-card', 'text-gray-300'); btn.classList.add('bg-white', 'text-dark', 'font-bold'); currentFilter = btn.dataset.filter; applyFilters(); }); });
         searchInput.addEventListener('input', applyFilters);
+        function applyFilters() { const query = searchInput.value.toLowerCase(); const filtered = referrals.filter(item => { const matchesCategory = currentFilter === 'all' || item.category === currentFilter; const matchesSearch = item.title.toLowerCase().includes(query) || item.description.toLowerCase().includes(query); return matchesCategory && matchesSearch; }); renderCards(filtered); }
 
-        function applyFilters() {
-            const query = searchInput.value.toLowerCase();
-            const filtered = referrals.filter(item => {
-                const matchesCategory = currentFilter === 'all' || item.category === currentFilter;
-                const matchesSearch = item.title.toLowerCase().includes(query) || item.description.toLowerCase().includes(query);
-                return matchesCategory && matchesSearch;
-            });
-            renderCards(filtered);
-        }
-
-        // --- Admin Side Logic ---
+        // --- Admin Logic ---
         let adminCategory = 'all';
         const adminSearchInput = document.getElementById('adminSearchInput');
-
         adminSearchInput.addEventListener('input', () => { renderAdminTable(); });
         function handleAdminFilterChange(value) { adminCategory = value; renderAdminTable(); }
 
         function renderAdminTable() {
-            const tbody = document.getElementById('adminTableBody');
-            tbody.innerHTML = '';
-            
+            const tbody = document.getElementById('adminTableBody'); tbody.innerHTML = '';
             const searchQuery = adminSearchInput.value.toLowerCase();
-            let filteredData = referrals.filter(item => {
-                const matchCategory = adminCategory === 'all' || item.category === adminCategory;
-                const matchSearch = item.title.toLowerCase().includes(searchQuery) || (item.code && item.code.toLowerCase().includes(searchQuery));
-                return matchCategory && matchSearch;
-            });
+            let filteredData = referrals.filter(item => { return (adminCategory === 'all' || item.category === adminCategory) && (item.title.toLowerCase().includes(searchQuery) || (item.code && item.code.toLowerCase().includes(searchQuery))); });
+            const sortedData = filteredData.sort((a, b) => { if (a.status === 'pending' && b.status !== 'pending') return -1; if (a.status !== 'pending' && b.status === 'pending') return 1; if (a.pinned && !b.pinned) return -1; if (!a.pinned && b.pinned) return 1; return b.id - a.id; });
 
-            const sortedData = filteredData.sort((a, b) => {
-                if (a.status === 'pending' && b.status !== 'pending') return -1;
-                if (a.status !== 'pending' && b.status === 'pending') return 1;
-                if (a.pinned && !b.pinned) return -1;
-                if (!a.pinned && b.pinned) return 1;
-                return b.id - a.id;
-            });
-
-            if (sortedData.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-gray-500">موردی با این فیلتر یافت نشد.</td></tr>`;
-                return;
-            }
+            if (sortedData.length === 0) { tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-gray-500">موردی با این فیلتر یافت نشد.</td></tr>`; return; }
 
             sortedData.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-gray-800/50 transition-colors";
-                
-                let statusBadge = '';
-                if(item.status === 'approved') statusBadge = '<span class="status-badge status-approved">تایید شده</span>';
-                else if(item.status === 'pending') statusBadge = '<span class="status-badge status-pending">در انتظار</span>';
-                else statusBadge = '<span class="status-badge status-rejected">رد شده</span>';
-
-                let actions = '';
-                if (item.status === 'pending') {
-                    actions = `
-                        <button onclick="changeStatus(${item.id}, 'approved')" class="text-secondary hover:bg-secondary/10 p-2 rounded-lg" title="تایید"><i class="fa-solid fa-check"></i></button>
-                        <button onclick="changeStatus(${item.id}, 'rejected')" class="text-danger hover:bg-danger/10 p-2 rounded-lg" title="رد"><i class="fa-solid fa-ban"></i></button>
-                    `;
-                } else {
-                    actions = `
-                        <button onclick="deleteReferral(${item.id})" class="text-gray-400 hover:text-danger hover:bg-danger/10 p-2 rounded-lg" title="حذف"><i class="fa-solid fa-trash"></i></button>
-                    `;
-                }
-                
+                const tr = document.createElement('tr'); tr.className = "hover:bg-gray-800/50 transition-colors";
+                let statusBadge = item.status === 'approved' ? '<span class="status-badge status-approved">تایید شده</span>' : (item.status === 'pending' ? '<span class="status-badge status-pending">در انتظار</span>' : '<span class="status-badge status-rejected">رد شده</span>');
+                let actions = item.status === 'pending' ? `<button onclick="changeStatus(${item.id}, 'approved')" class="text-secondary hover:bg-secondary/10 p-2 rounded-lg" title="تایید"><i class="fa-solid fa-check"></i></button><button onclick="changeStatus(${item.id}, 'rejected')" class="text-danger hover:bg-danger/10 p-2 rounded-lg" title="رد"><i class="fa-solid fa-ban"></i></button>` : `<button onclick="deleteReferral(${item.id})" class="text-gray-400 hover:text-danger hover:bg-danger/10 p-2 rounded-lg" title="حذف"><i class="fa-solid fa-trash"></i></button>`;
                 const pinBtnClass = item.pinned ? 'text-gold bg-yellow-500/10' : 'text-gray-600 hover:text-gray-400';
-                const pinAction = `<button onclick="togglePin(${item.id})" class="${pinBtnClass} p-2 rounded-lg transition-colors" title="${item.pinned ? 'برداشتن پین' : 'پین کردن'}"><i class="fa-solid fa-thumbtack"></i></button>`;
-
-                // NEW: Edit Button
-                const editAction = `<button onclick="openEditModal(${item.id})" class="text-blue-400 hover:bg-blue-500/10 p-2 rounded-lg" title="ویرایش"><i class="fa-solid fa-pen"></i></button>`;
-
-                tr.innerHTML = `
-                    <td class="px-6 py-4 flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-full bg-dark border border-gray-700 flex items-center justify-center ${item.color}"><i class="fa-solid ${item.icon}"></i></div>
-                        <span class="text-white font-medium">${item.title}</span>
-                    </td>
-                    <td class="px-6 py-4 text-gray-400">${getCategoryName(item.category)}</td>
-                    <td class="px-6 py-4 font-mono text-gray-400 text-xs">${item.code || 'لینک'}</td>
-                    <td class="px-6 py-4">${statusBadge}</td>
-                    <td class="px-6 py-4 text-center">${pinAction}</td>
-                    <td class="px-6 py-4 flex justify-center gap-1">
-                        ${editAction}
-                        ${actions}
-                    </td>
-                `;
+                const pinAction = `<button onclick="togglePin(${item.id})" class="${pinBtnClass} p-2 rounded-lg transition-colors"><i class="fa-solid fa-thumbtack"></i></button>`;
+                const editAction = `<button onclick="openEditModal(${item.id})" class="text-blue-400 hover:bg-blue-500/10 p-2 rounded-lg"><i class="fa-solid fa-pen"></i></button>`;
+                tr.innerHTML = `<td class="px-6 py-4 flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-dark border border-gray-700 flex items-center justify-center ${item.color}"><i class="fa-solid ${item.icon}"></i></div><span class="text-white font-medium">${item.title}</span></td><td class="px-6 py-4 text-gray-400">${getCategoryName(item.category)}</td><td class="px-6 py-4 font-mono text-gray-400 text-xs">${item.code || 'لینک'}</td><td class="px-6 py-4">${statusBadge}</td><td class="px-6 py-4 text-center">${pinAction}</td><td class="px-6 py-4 flex justify-center gap-1">${editAction}${actions}</td>`;
                 tbody.appendChild(tr);
             });
         }
@@ -738,170 +521,30 @@
             document.getElementById('stat-approved').innerText = referrals.filter(i => i.status === 'approved').length;
         }
 
-        function togglePin(id) {
-            const index = referrals.findIndex(i => i.id === id);
-            if (index !== -1) {
-                referrals[index].pinned = !referrals[index].pinned;
-                renderAdminTable();
-                updateStats();
-                const msg = referrals[index].pinned ? 'آگهی پین شد' : 'پین آگهی برداشته شد';
-                showToast(msg, 'success');
-            }
-        }
+        function togglePin(id) { const index = referrals.findIndex(i => i.id === id); if (index !== -1) { referrals[index].pinned = !referrals[index].pinned; renderAdminTable(); updateStats(); showToast(referrals[index].pinned ? 'آگهی پین شد' : 'پین آگهی برداشته شد', 'success'); } }
+        function changeStatus(id, newStatus) { const index = referrals.findIndex(i => i.id === id); if (index !== -1) { referrals[index].status = newStatus; renderAdminTable(); updateStats(); showToast(`وضعیت تغییر یافت.`, 'success'); } }
+        function deleteReferral(id) { if(confirm('آیا از حذف این آگهی مطمئن هستید؟')) { referrals = referrals.filter(i => i.id !== id); renderAdminTable(); updateStats(); showToast('آگهی حذف شد.', 'error'); } }
 
-        function changeStatus(id, newStatus) {
-            const index = referrals.findIndex(i => i.id === id);
-            if (index !== -1) {
-                referrals[index].status = newStatus;
-                renderAdminTable();
-                updateStats();
-                showToast(`وضعیت تغییر یافت.`, 'success');
-            }
-        }
-
-        function deleteReferral(id) {
-            if(confirm('آیا از حذف این آگهی مطمئن هستید؟')) {
-                referrals = referrals.filter(i => i.id !== id);
-                renderAdminTable();
-                updateStats();
-                showToast('آگهی حذف شد.', 'error');
-            }
-        }
-
-        // --- Edit Logic (New) ---
-        const editModal = document.getElementById('editModal');
-        
-        function openEditModal(id) {
-            const item = referrals.find(i => i.id === id);
-            if(!item) return;
-
-            document.getElementById('editId').value = item.id;
-            document.getElementById('editCategory').value = item.category;
-            document.getElementById('editTitle').value = item.title;
-            document.getElementById('editCode').value = item.code || '';
-            document.getElementById('editLink').value = item.link || '';
-            document.getElementById('editDesc').value = item.description;
-
-            editModal.classList.remove('hidden');
-        }
-
-        function closeEditModal() {
-            editModal.classList.add('hidden');
-        }
-
-        function handleEditSubmit(e) {
-            e.preventDefault();
-            const id = parseInt(document.getElementById('editId').value);
-            const index = referrals.findIndex(i => i.id === id);
-            
-            if(index !== -1) {
-                referrals[index].title = document.getElementById('editTitle').value;
-                referrals[index].category = document.getElementById('editCategory').value;
-                referrals[index].code = document.getElementById('editCode').value || null;
-                referrals[index].link = document.getElementById('editLink').value || null;
-                referrals[index].description = document.getElementById('editDesc').value;
-
-                // Update Icon/Color based on category (simple logic)
-                // You could expand this to let user pick icon
-                
-                showToast('تغییرات با موفقیت ذخیره شد.', 'success');
-                closeEditModal();
-                renderAdminTable();
-                applyFilters(); // Update user view as well
-            }
-        }
-
-        // --- Shared Functions ---
+        // --- Modals & Helpers ---
         function openModal() { modal.classList.remove('hidden'); }
         function closeModal() { modal.classList.add('hidden'); }
+        const editModal = document.getElementById('editModal');
+        function openEditModal(id) { const item = referrals.find(i => i.id === id); if(!item) return; document.getElementById('editId').value = item.id; document.getElementById('editCategory').value = item.category; document.getElementById('editTitle').value = item.title; document.getElementById('editCode').value = item.code || ''; document.getElementById('editLink').value = item.link || ''; document.getElementById('editDesc').value = item.description; editModal.classList.remove('hidden'); }
+        function closeEditModal() { editModal.classList.add('hidden'); }
+        function handleEditSubmit(e) { e.preventDefault(); const id = parseInt(document.getElementById('editId').value); const index = referrals.findIndex(i => i.id === id); if(index !== -1) { referrals[index].title = document.getElementById('editTitle').value; referrals[index].category = document.getElementById('editCategory').value; referrals[index].code = document.getElementById('editCode').value || null; referrals[index].link = document.getElementById('editLink').value || null; referrals[index].description = document.getElementById('editDesc').value; showToast('تغییرات ذخیره شد.', 'success'); closeEditModal(); renderAdminTable(); applyFilters(); } }
         
-        // Guide Modal Functions
         const guideModal = document.getElementById('guideModal');
         const tabGeneral = document.getElementById('tab-general');
         const tabKyc = document.getElementById('tab-kyc');
         const contentGeneral = document.getElementById('guide-general');
         const contentKyc = document.getElementById('guide-kyc');
-
-        function openGuideModal() { 
-            guideModal.classList.remove('hidden'); 
-            switchGuideTab('general'); 
-        }
+        function openGuideModal() { guideModal.classList.remove('hidden'); switchGuideTab('general'); }
         function closeGuideModal() { guideModal.classList.add('hidden'); }
+        function switchGuideTab(tab) { if(tab === 'general') { tabGeneral.classList.add('text-white', 'border-primary', 'bg-primary/5'); tabGeneral.classList.remove('text-gray-400', 'border-transparent'); tabKyc.classList.remove('text-white', 'border-primary', 'bg-primary/5'); tabKyc.classList.add('text-gray-400', 'border-transparent'); contentGeneral.classList.remove('hidden'); contentKyc.classList.add('hidden'); } else { tabKyc.classList.add('text-white', 'border-primary', 'bg-primary/5'); tabKyc.classList.remove('text-gray-400', 'border-transparent'); tabGeneral.classList.remove('text-white', 'border-primary', 'bg-primary/5'); tabGeneral.classList.add('text-gray-400', 'border-transparent'); contentKyc.classList.remove('hidden'); contentGeneral.classList.add('hidden'); } }
 
-        function switchGuideTab(tab) {
-            if(tab === 'general') {
-                tabGeneral.classList.add('text-white', 'border-primary', 'bg-primary/5');
-                tabGeneral.classList.remove('text-gray-400', 'border-transparent');
-                tabKyc.classList.remove('text-white', 'border-primary', 'bg-primary/5');
-                tabKyc.classList.add('text-gray-400', 'border-transparent');
-                contentGeneral.classList.remove('hidden');
-                contentKyc.classList.add('hidden');
-            } else {
-                tabKyc.classList.add('text-white', 'border-primary', 'bg-primary/5');
-                tabKyc.classList.remove('text-gray-400', 'border-transparent');
-                tabGeneral.classList.remove('text-white', 'border-primary', 'bg-primary/5');
-                tabGeneral.classList.add('text-gray-400', 'border-transparent');
-                contentKyc.classList.remove('hidden');
-                contentGeneral.classList.add('hidden');
-            }
-        }
-
-        function handleAddSubmit(e) {
-            e.preventDefault();
-            const btn = e.target.querySelector('button[type="submit"]');
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ...';
-            btn.disabled = true;
-
-            const newItem = {
-                id: Date.now(),
-                title: document.getElementById('newTitle').value,
-                category: document.getElementById('newCategory').value,
-                description: document.getElementById('newDesc').value,
-                code: document.getElementById('newCode').value || null,
-                link: document.getElementById('newLink').value || null,
-                icon: "fa-rocket",
-                color: "text-gray-300",
-                views: 0,
-                status: 'pending', 
-                pinned: true      
-            };
-
-            setTimeout(() => {
-                referrals.unshift(newItem); 
-                showToast('آگهی ثبت شد و پس از تایید مدیر، در بالای لیست (پین شده) نمایش داده می‌شود.', 'success');
-                closeModal();
-                e.target.reset();
-                btn.innerHTML = 'ثبت آگهی رایگان';
-                btn.disabled = false;
-                applyFilters(); 
-            }, 1000);
-        }
-
-        function copyToClipboard(text) {
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            textArea.style.position = "fixed"; textArea.style.left = "-9999px";
-            document.body.appendChild(textArea);
-            textArea.focus(); textArea.select();
-            try {
-                document.execCommand('copy');
-                showToast(`کد "${text}" کپی شد!`, 'success');
-            } catch (err) { showToast('خطا در کپی.', 'error'); }
-            document.body.removeChild(textArea);
-        }
-
-        function showToast(message, type = 'success') {
-            const toastContainer = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            const colorClass = type === 'success' ? 'border-secondary/50 text-secondary' : 'border-red-500/50 text-red-400';
-            const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
-            toast.className = `bg-card border ${colorClass} text-white px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 min-w-[300px] animate-slide-in`;
-            toast.innerHTML = `<i class="fa-solid ${icon} text-lg"></i><span class="text-sm font-medium">${message}</span>`;
-            toastContainer.appendChild(toast);
-            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
-        }
-
-        // Init
+        function handleAddSubmit(e) { e.preventDefault(); const btn = e.target.querySelector('button[type="submit"]'); btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ...'; btn.disabled = true; const newItem = { id: Date.now(), title: document.getElementById('newTitle').value, category: document.getElementById('newCategory').value, description: document.getElementById('newDesc').value, code: document.getElementById('newCode').value || null, link: document.getElementById('newLink').value || null, icon: "fa-rocket", color: "text-gray-300", views: 0, status: 'pending', pinned: true }; setTimeout(() => { referrals.unshift(newItem); showToast('آگهی ثبت شد و پس از تایید مدیر نمایش داده می‌شود.', 'success'); closeModal(); e.target.reset(); btn.innerHTML = 'ثبت آگهی رایگان'; btn.disabled = false; applyFilters(); }, 1000); }
+        function copyToClipboard(text) { const textArea = document.createElement("textarea"); textArea.value = text; textArea.style.position = "fixed"; textArea.style.left = "-9999px"; document.body.appendChild(textArea); textArea.focus(); textArea.select(); try { document.execCommand('copy'); showToast(`کد "${text}" کپی شد!`, 'success'); } catch (err) { showToast('خطا در کپی.', 'error'); } document.body.removeChild(textArea); }
+        function showToast(message, type = 'success') { const toastContainer = document.getElementById('toast-container'); const toast = document.createElement('div'); const colorClass = type === 'success' ? 'border-secondary/50 text-secondary' : 'border-red-500/50 text-red-400'; const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; toast.className = `bg-card border ${colorClass} text-white px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 min-w-[300px] animate-slide-in`; toast.innerHTML = `<i class="fa-solid ${icon} text-lg"></i><span class="text-sm font-medium">${message}</span>`; toastContainer.appendChild(toast); setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000); }
         renderCards(referrals);
     </script>
     <style>
